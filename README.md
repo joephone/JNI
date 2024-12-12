@@ -1,2 +1,0 @@
-# JNI
-hello from C++

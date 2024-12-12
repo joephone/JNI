@@ -14,11 +14,10 @@ public class MainActivity extends AppCompatActivity {
         System.loadLibrary("jni");
     }
 
-    /**
-     * A native method that is implemented by the 'jni' native library,
-     * which is packaged with this application.
-     */
-    public native String stringFromJNI();
+
+    public native void changeName();   //alt + enter 创建
+
+    private String name = "joephone";    //调用C++ 修改为 joe
 
     private ActivityMainBinding binding;
 
@@ -34,4 +33,9 @@ public class MainActivity extends AppCompatActivity {
         tv.setText(stringFromJNI());
     }
 
+    /**
+     * A native method that is implemented by the 'jni' native library,
+     * which is packaged with this application.
+     */
+    public native String stringFromJNI();
 }
