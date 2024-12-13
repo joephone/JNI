@@ -19,7 +19,11 @@ public class MainActivity extends AppCompatActivity {
 
     public native void changeName();   //alt + enter 创建   改变我们的属性 name
 
+    public static native void changeAge();
+
     private String name = "joephone";    //调用C++ 修改为 joe
+
+    public static int age = 28;   //  用native代码 修改为：29
 
     private ActivityMainBinding binding;
 
@@ -34,12 +38,20 @@ public class MainActivity extends AppCompatActivity {
         TextView tv = binding.sampleText;
         tv.setText(stringFromJNI());
 
-        Button btnShow = binding.btnShow;
-        btnShow.setOnClickListener(v -> {
+        Button btnChangeName = binding.btnChangeName;
+        btnChangeName.setOnClickListener(v -> {
             System.out.println("修改前的name:"+name);
             changeName();
             System.out.println("修改后的name:"+name);
-            btnShow.setText("修改后的name:"+name);
+            btnChangeName.setText("修改后的name:"+name);
+        });
+
+        Button btnChangeAge = binding.btnChangeAge;
+        btnChangeAge.setOnClickListener(v -> {
+            System.out.println("修改前的age:"+age);
+            changeAge();
+            System.out.println("修改后的age:"+age);
+            btnChangeAge.setText("修改后的age:"+age);
         });
 
     }

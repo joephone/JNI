@@ -23,3 +23,18 @@ Java_com_transcendence_jni_MainActivity_changeName(JNIEnv *env, jobject thiz) { 
     jstring  value = env->NewStringUTF("修改为joe");
     env->SetObjectField(thiz,nameFid,value);
 }
+
+// jobject == MainActivity this 实例调用的
+// jclass == MainActivity class 类调用的
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_transcendence_jni_MainActivity_changeAge(JNIEnv *env, jclass clazz) {
+    //  jfieldID GetStaticFieldID(jclass clazz, const char* name, const char* sig)
+    jfieldID ageFid = env->GetStaticFieldID(clazz, "age", "I");
+
+    // jint 背后就是int，所以可以直接用，  但是String 必须用 jstring
+    int age = env->GetStaticIntField(clazz, ageFid); // 获取之前的age
+
+    //  void SetStaticIntField(jclass clazz, jfieldID fieldID, jint value)
+    env->SetStaticIntField(clazz, ageFid, age+10);
+}
