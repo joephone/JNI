@@ -1,6 +1,15 @@
 #include <jni.h>
 #include <string>
 
+//日志输出
+#include <android/log.h>
+#define TAG "wan"
+
+// __VA_ARGS__ 代表 ...的可变参数
+#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG, TAG,  __VA_ARGS__);
+#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, TAG,  __VA_ARGS__);
+#define LOGI(...) __android_log_print(ANDROID_LOG_INFO, TAG,  __VA_ARGS__);
+
 extern "C" JNIEXPORT jstring
 
 JNICALL
@@ -8,6 +17,8 @@ Java_com_transcendence_jni_MainActivity_stringFromJNI(
         JNIEnv *env,
         jobject /* this */) {
     std::string hello = "Hello from C++";
+
+    LOGD("hello.c_str()输出：\n", hello.c_str())
     return env->NewStringUTF(hello.c_str());
 }
 extern "C"  //代表下面的代码采用C的编译方式
